@@ -433,7 +433,7 @@ const LogoG = () => (
 
     {/* Wordmark */}
     <text x="48" y="35" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -446,7 +446,7 @@ const LogoA = () => (
     <circle cx="32" cy="25" r="5.5" fill="#0098d4" />
     <circle cx="52" cy="25" r="5.5" fill="#c8922a" />
     <text x="68" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -458,7 +458,7 @@ const LogoB = () => (
     <circle cx="30" cy="25" r="5.5" fill="#0098d4" />
     <polygon points="48,19 42,25 48,31 54,25" fill="#c8922a" />
     <text x="66" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -480,7 +480,7 @@ const LogoC = () => (
     <circle className="lc-d2" cx="30" cy="25" r="5.5" fill="#0098d4" />
     <circle className="lc-d3" cx="48" cy="25" r="5.5" fill="#c8922a" />
     <text x="64" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -542,7 +542,7 @@ const LogoD = () => {
       `}</style></defs>
       {pixels}
       <text x="42" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-        <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+        <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
       </text>
     </svg>
   );
@@ -560,7 +560,7 @@ const LogoE = () => (
     </defs>
     <rect x="4" y="18" width="44" height="14" rx="7" fill="url(#lgEflow)" />
     <text x="58" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -594,7 +594,7 @@ const LogoF = () => {
         {px(15, 44, '#1e3a5f')}{px(19, 44, '#1e3a5f')}{px(23, 44, '#1e3a5f')}
       </g>
       <text x="48" y="32" fontFamily="'Plus Jakarta Sans',Inter,sans-serif" fontSize="26" fontWeight="800" letterSpacing="-1">
-        <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+        <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
       </text>
     </svg>
   );
@@ -641,7 +641,7 @@ const LogoH = () => (
 
     {/* Wordmark */}
     <text x="64" y="38" fontFamily="'Baloo 2','Plus Jakarta Sans',Inter,sans-serif" fontSize="30" fontWeight="700" letterSpacing="-1">
-      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+      <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
     </text>
   </svg>
 );
@@ -679,7 +679,7 @@ const LogoConceptsPage = memo(({ onBack }) => {
         <h2 style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '1.5rem', fontWeight: 800,
           color: C.primary, margin: '0 0 0.3rem',
-        }}>TYRO SignSnap — Yeni Logo Fikirleri</h2>
+        }}>tyroSign — Yeni Logo Fikirleri</h2>
         <p style={{ fontSize: '0.8rem', color: C.text2, margin: 0, lineHeight: 1.5 }}>
           8 farklı konsept — TYRO renk paleti, modern app icon trendleri
         </p>

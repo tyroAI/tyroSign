@@ -166,7 +166,7 @@ const DinTechWordmark = ({ logoSize = 40, fontSize = 28 }) => (
       fontSize, fontWeight: 700, letterSpacing: -1, lineHeight: 1,
     }}>
       <span style={{ color: '#1e3a5f' }}>tyro</span>
-      <span style={{ color: '#c8922a' }}>sign</span>
+      <span style={{ color: '#c8922a' }}>Sign</span>
     </span>
   </div>
 );
@@ -253,7 +253,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 32, fontWeight: 700, letterSpacing: -1,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
         </div>
       </section>
@@ -280,7 +280,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
               fontSize: 32, fontWeight: 700, letterSpacing: -1,
             }}>
               <span style={{ color: '#1e3a5f' }}>tyro</span>
-              <span style={{ color: '#c8922a' }}>sign</span>
+              <span style={{ color: '#c8922a' }}>Sign</span>
             </span>
           </div>
         </div>
@@ -296,7 +296,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 32, fontWeight: 700, letterSpacing: -1,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
         </div>
 
@@ -390,7 +390,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 48, fontWeight: 700, letterSpacing: -1.5,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
         </div>
 
@@ -404,7 +404,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 48, fontWeight: 700, letterSpacing: -1.5,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 12 }}>
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff', opacity: 0.6 }} />
@@ -423,7 +423,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 48, fontWeight: 700, letterSpacing: -1.5,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
         </div>
 
@@ -437,7 +437,7 @@ const LogoLabPage = memo(function LogoLabPage({ onBack }) {
             fontSize: 48, fontWeight: 700, letterSpacing: -1.5,
           }}>
             <span style={{ color: '#fff' }}>tyro</span>
-            <span style={{ color: '#c8922a' }}>sign</span>
+            <span style={{ color: '#c8922a' }}>Sign</span>
           </span>
           <div style={{ marginTop: 8, fontSize: '0.7rem', color: '#94a3b8', letterSpacing: 3, textTransform: 'uppercase' }}>
             corporate email signature

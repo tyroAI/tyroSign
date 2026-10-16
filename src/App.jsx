@@ -159,7 +159,7 @@ export default function App() {
     officeId: '', companyId: '', gsm: '', email: '', linkedinPersonal: '',
   });
   const DEFAULT_STG = {
-    companyName: 'TYRO Tech', website: 'www.tyrotech.demo',
+    companyName: 'tyroTech', website: 'www.tyrotech.demo',
     slogan: 'Smart tech. Strong future.', logoColor: '#1e3a5f', accentColor: '#0098d4',
     logoBase64: DEFAULT_LOGO_BASE64, logoW: DEFAULT_LOGO_W, logoH: DEFAULT_LOGO_H,
     social: { linkedin: 'https://www.linkedin.com/company/tyro-tech-demo/', twitter: 'https://x.com/tyrotechdemo', facebook: 'https://www.facebook.com/tyrotechdemo', instagram: 'https://www.instagram.com/tyrotechdemo/' },
@@ -222,7 +222,7 @@ export default function App() {
       ru: 'Корпоративная Студия Цифровых Подписей',
       ar: 'استوديو التوقيع الرقمي المؤسسي',
     }[lang] || 'Corporate Digital Signature Studio';
-    document.title = `tyrosign - ${slogan}`;
+    document.title = `tyroSign - ${slogan}`;
     try { document.documentElement.setAttribute('lang', lang); } catch {}
   }, [lang]);
   useEffect(() => { try { const { designId, ...persist } = stg; localStorage.setItem('tyro-stg', JSON.stringify(persist)); } catch {} }, [stg]);
@@ -254,7 +254,7 @@ export default function App() {
   }, [company, lang, loadLogo]);
 
   // ─── Kartvizitin QR üstündeki ANA MARKA logosu ───
-  // Kural (Ventures → Nexa Studio, TYRO Vakfı → kendi, diğerleri → TYRO) cardStg.js'te;
+  // Kural (Ventures → tyroVentures, tyroFoundation → kendi, diğerleri → TYRO) cardStg.js'te;
   // CardEmbed.jsx de aynı kaynaktan okuyor.
   const [cardLogo, setCardLogo] = useState(MAIN_CARD_LOGO);
   useEffect(() => {
@@ -334,7 +334,7 @@ export default function App() {
     ]).then(([t, m]) => {
       if (!cancelled) setNavyBadge({ base64: t.base64, base64Mso: m ? m.base64 : null, w: t.w, h: t.h, label });
     });
-    // Üst = TYRO Tech (logosuz) → standart tyro logosu
+    // Üst = tyroTech (logosuz) → standart tyro logosu
     if (!url) { finalize(DEFAULT_LOGO_BASE64); return () => { cancelled = true; }; }
     loadLogo(url).then(res => { if (!cancelled) finalize(res ? res.base64 : DEFAULT_LOGO_BASE64); });
     return () => { cancelled = true; };
@@ -348,16 +348,16 @@ export default function App() {
       logoW: companyLogo.w,
       logoH: companyLogo.h,
       logoLeftOffset: companyLogo.leftOffset || 0,
-      // Kartvizitin QR üstündeki ana marka logosu (Ventures → Nexa Studio, diğerleri → TYRO).
+      // Kartvizitin QR üstündeki ana marka logosu (Ventures → tyroVentures, diğerleri → TYRO).
       // Yalnızca BusinessCardModal kullanır; imza üreticileri logoBase64'ü kullanmaya devam eder.
       cardLogoBase64: cardLogo.base64,
       cardLogoW: cardLogo.w,
       cardLogoH: cardLogo.h,
-      // Kart logosu TYRO ana logosu mu? (Nexa Studio ise false.) Kartvizitte yalnızca
+      // Kart logosu TYRO ana logosu mu? (tyroVentures ise false.) Kartvizitte yalnızca
       // TYRO logosuna küçük bir optik sola kaydırma uygulanıyor — bkz.
       // BusinessCardModal içindeki MAIN_LOGO_DX.
       cardLogoIsMain: !!cardLogo.main,
-      // Kısa şirket adı (lang-aware; RU/AR → EN). TYRO Digital: her dilde İngilizce.
+      // Kısa şirket adı (lang-aware; RU/AR → EN). tyroDigital: her dilde İngilizce.
       companyName: company
         ? (company.id === 'tyro-digital' ? company.nameEN : (lang === 'tr' ? company.name : (company.nameEN || company.name)))
         : stg.companyName,

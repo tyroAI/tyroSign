@@ -1,19 +1,21 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 // DEMO SÜRÜMÜ — gerçek Azure AD / Microsoft Graph bağlantısı YOK.
-// "Giriş Yap" butonu sahte bir hesapla doğrudan uygulamaya sokar; profil, yönetici
-// ve e-posta gönderimi tamamen dummy veriyle simüle edilir. Arayüz kurumsal sürümle
-// aynı kalsın diye hook'un dönüş imzası birebir korunmuştur.
+// "Giriş Yap" butonu sahte bir hesapla doğrudan uygulamaya sokar; profil, profil
+// fotoğrafı, yönetici ve e-posta gönderimi tamamen dummy veriyle simüle edilir.
+// Arayüz kurumsal sürümle aynı kalsın diye hook'un dönüş imzası birebir korunmuştur.
+// Profil fotoğrafı: Unsplash lisanslı stok kurumsal portre (public/demo-avatar.jpg).
 const MSAL_ENABLED = true;
 const SESSION_KEY = 'tyro-demo-session';
+const AVATAR_URL = import.meta.env.BASE_URL + 'demo-avatar.jpg';
 
 const DEMO_ACCOUNT = { name: 'Deniz Aydın', username: 'deniz.aydin@tyrotech.demo' };
 
 const DEMO_PROFILE = {
   firstName: 'Deniz',
   lastName: 'Aydın',
-  titleTR: 'Dijital Dönüşüm Uzmanı',
-  titleEN: 'Digital Transformation Specialist',
+  titleTR: 'Dijital Dönüşüm Direktörü',
+  titleEN: 'Director of Digital Transformation',
   companyId: 'tyro-tech',
   officeId: 'ist-merkez',
   gsm: '+90 500 000 00 00',
@@ -29,23 +31,37 @@ const hasSession = () => {
   try { return sessionStorage.getItem(SESSION_KEY) === '1'; } catch { return false; }
 };
 
+// Graph'taki /me/photo akışıyla aynı biçim: blob → data URL (kartvizit canvas'ı base64 bekliyor)
+const loadAvatar = () => fetch(AVATAR_URL)
+  .then(r => (r.ok ? r.blob() : Promise.reject(new Error('avatar'))))
+  .then(blob => new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  }))
+  .catch(() => null);
+
 export function useMsal({ toast, lang, setForm }) {
-  const [msalAccount, setMsalAccount] = useState(() => {
-    if (!hasSession()) return null;
-    // Yenilemede oturum korunur; form da dummy profille dolu gelsin.
-    setTimeout(() => setForm(prev => ({ ...prev, ...DEMO_PROFILE })), 0);
-    return DEMO_ACCOUNT;
-  });
+  const [msalAccount, setMsalAccount] = useState(() => (hasSession() ? DEMO_ACCOUNT : null));
   const [authLoading, setAuthLoading] = useState(false);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+  // Oturum açıkken (girişte ya da yenilemede) dummy profil + fotoğraf yüklenir
+  useEffect(() => {
+    if (!msalAccount) { setProfilePhoto(null); return; }
+    setForm(prev => ({ ...prev, ...DEMO_PROFILE }));
+    let cancelled = false;
+    loadAvatar().then(p => { if (!cancelled) setProfilePhoto(p); });
+    return () => { cancelled = true; };
+  }, [msalAccount, setForm]);
 
   const handleLogin = useCallback(async () => {
     setAuthLoading(true);
     await wait(700);
     try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* private mode */ }
-    setForm(prev => ({ ...prev, ...DEMO_PROFILE }));
     setMsalAccount(DEMO_ACCOUNT);
     setAuthLoading(false);
-  }, [setForm]);
+  }, []);
 
   const handleLogout = useCallback(async () => {
     try { sessionStorage.removeItem(SESSION_KEY); } catch { /* private mode */ }
@@ -63,5 +79,5 @@ export function useMsal({ toast, lang, setForm }) {
     return true;
   }, [toast, lang]);
 
-  return { MSAL_ENABLED, msalReady: true, msalAccount, authLoading, handleLogin, handleLogout, fetchManager, sendMail, profilePhoto: null };
+  return { MSAL_ENABLED, msalReady: true, msalAccount, authLoading, handleLogin, handleLogout, fetchManager, sendMail, profilePhoto };
 }

@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 /* ─── APP CONFIG ─── */
 const APP = {
   prefix: 'tyro',
-  suffix: 'sign',
+  suffix: 'Sign',
   version: '1.0.0',
   headline1: { tr: 'Kurumsal Dijital', en: 'Corporate Digital', ru: 'Корпоративная Цифровая', ar: 'الاستوديو الرقمي' },
   headline2: { tr: 'İmza & Kart Stüdyosu', en: 'Signature & Card Studio', ru: 'Студия Подписей и Визиток', ar: 'للتوقيع والبطاقات' },
@@ -439,13 +439,13 @@ const LoginSplash = memo(({ lang, setLang, authLoading, msalReady, handleLogin }
               </div>
             </div>
 
-            {/* TYRO Tech Footer — pinned bottom-left */}
+            {/* tyroTech Footer — pinned bottom-left */}
             <div className="tyro-tech-footer" style={{
               padding: '12px 48px 24px', borderTop: '1px solid rgba(255,255,255,0.06)',
               animation: 'fadeUp 0.5s cubic-bezier(0.4,0,0.2,1) 1100ms both',
             }}>
               <span style={{ fontSize: '0.75rem', color: 'rgba(240,240,245,0.45)' }}>
-                Powered by TYRO Tech
+                Powered by tyroTech
               </span>
               <span style={{ fontSize: '0.68rem', color: 'rgba(240,240,245,0.35)', marginLeft: 8 }}>
                 v{APP.version}
@@ -519,7 +519,7 @@ const LoginSplash = memo(({ lang, setLang, authLoading, msalReady, handleLogin }
               fontWeight: 700, fontSize: '1.4rem', letterSpacing: '-0.04em', lineHeight: 1,
             }}>
               <span style={{ color: '#1e3a5f' }}>tyro</span>
-              <span style={{ color: '#c8922a' }}>sign</span>
+              <span style={{ color: '#c8922a' }}>Sign</span>
             </span>
           </div>
 

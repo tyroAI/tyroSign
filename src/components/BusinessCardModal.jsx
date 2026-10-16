@@ -347,14 +347,14 @@ async function drawBusinessCard(qrCanvas, form, stg, office, company, profileBas
   // Şirket logosu QR'ın ÜSTÜNDE, aynı cam çerçevenin İÇİNDE: QR'ın 4 modüllük beyaz
   // sessiz alanıyla birleşerek tek blok gibi durur. QR küçültülmez (okunurluk önce
   // gelir) → çerçeve bant kadar uzar. Logo yoksa bant hiç eklenmez.
-  // QR üstündeki logo = ANA MARKA logosu (Ventures → Nexa Studio, diğerleri → TYRO;
+  // QR üstündeki logo = ANA MARKA logosu (Ventures → tyroVentures, diğerleri → TYRO;
   // App.jsx hesaplar). Şirketin kendi logosu kartta kullanılmıyor — kimlik zaten
   // resmi ünvan satırında yazıyor. Eski davranışa güvenli düşüş: logoBase64.
   const cardLogo = stg.cardLogoBase64 || stg.logoBase64;
   const cardLogoW = stg.cardLogoBase64 ? stg.cardLogoW : stg.logoW;
   const cardLogoH = stg.cardLogoBase64 ? stg.cardLogoH : stg.logoH;
   // Ana tyro logosu aynı bant yüksekliğinde diğerlerinden BÜYÜK görünüyor: oranı
-  // 3.14, Nexa Studio/şirket logolarının 3.90 → aynı yükseklikte harfleri daha iri kalıyor.
+  // 3.14, tyroVentures/şirket logolarının 3.90 → aynı yükseklikte harfleri daha iri kalıyor.
   // Bu yüzden sadece ona %18 küçültme (kullanıcı isteği: "sadece TYRO için özel").
   // ORAN, BANTTA GÖSTERİLEN logodan alınmalı (şirket logosundan DEĞİL): aksi halde
   // şirket logosu 3.90 iken bantta TYRO (3.14) durduğunda yükseklik yanlış seçilip
@@ -375,7 +375,7 @@ async function drawBusinessCard(qrCanvas, form, stg, office, company, profileBas
   // solundaki swoosh ince/açık renkli, sağdaki wordmark ise koyu ve dolu, bu yüzden
   // görsel ağırlık merkezi piksel merkezinin sağında kalıyor ve logo sağa kaçık
   // algılanıyor. (Ölçüldü: 320x102 tuvalde görünür kutu x 0→310, yani tuvalin
-  // kendisinde de 9px'i sağda boş.) Nexa Studio logosunda bu asimetri olmadığı için
+  // kendisinde de 9px'i sağda boş.) tyroVentures logosunda bu asimetri olmadığı için
   // kaydırma ona UYGULANMAZ. Ayarlamak için tek sayı: büyütmek = daha sola.
   const MAIN_LOGO_DX = 4;
   const qrLogoDx = stg.cardLogoIsMain ? -MAIN_LOGO_DX : 0;
@@ -938,7 +938,7 @@ function generateQrSvg(vcard) {
 // yoksa kısa şirket adına düşer. Ünvan tüm dillerde aynıdır (resmi ad çevrilmez).
 function getCompanyName(company, stg, lang) {
   if (stg && stg.companyLegalName) return stg.companyLegalName;
-  if (!company) return (stg && stg.companyName) || 'TYRO Tech';
+  if (!company) return (stg && stg.companyName) || 'tyroTech';
   return (lang !== 'tr' && company.nameEN) ? company.nameEN : company.name;
 }
 
@@ -1798,7 +1798,7 @@ const BusinessCardModal = memo(({ open, onClose, form, office, stg, company, toa
             padding: 6, boxSizing: 'border-box',
           }}>
             {(stg.cardLogoBase64 || stg.logoBase64) && (
-              // ANA MARKA logosu: Ventures grubunda Nexa Studio, diğerlerinde TYRO
+              // ANA MARKA logosu: Ventures grubunda tyroVentures, diğerlerinde TYRO
               // (App.jsx hesaplar). Oran < 3.5 olan (TYRO) bir tık küçük —
               // bkz. drawBusinessCard'daki not.
               <img src={stg.cardLogoBase64 || stg.logoBase64} alt=""

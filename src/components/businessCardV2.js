@@ -794,7 +794,7 @@ export function buildBusinessCardV2Html({
   // belirsiz ve tarayıcıya göre değişebiliyor. dx = TYRO optik kaydırması.
   // Logo, kutunun İÇİNDE hem yatay hem DİKEY ortalanır. Tuval de öyle yapıyor
   // (drawImage y = logo.top + (boxH - h)/2). Eskiden HTML'de yalnız top veriliyordu →
-  // yüksekliği kutudan küçük logolar (geniş wordmark'lar, ör. Nexa Studio) kutunun ÜSTÜNE
+  // yüksekliği kutudan küçük logolar (geniş wordmark'lar, ör. tyroVentures) kutunun ÜSTÜNE
   // yapışıp tuvalden ~12px yukarıda duruyordu.
   const logoHtml = cardLogo
     ? `<div style="position:absolute;left:0;right:0;top:${lay.logo.top}px;height:${lay.logo.boxH}px;`

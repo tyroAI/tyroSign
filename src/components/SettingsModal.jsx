@@ -178,7 +178,7 @@ const SettingsModal = memo(({
                     }}>
                       <span style={{ fontFamily: "'Baloo 2',Inter,sans-serif", fontSize: '0.85rem', fontWeight: 700, letterSpacing: -0.5 }}>
                         <span style={{ color: t.tyro || '#fff' }}>tyro</span>
-                        <span style={{ color: '#c8922a' }}>sign</span>
+                        <span style={{ color: '#c8922a' }}>Sign</span>
                       </span>
                     </div>
                     <div style={{ fontSize: '0.55rem', fontWeight: 600, color: active ? C.accent : C.textM, padding: '0.25rem 0', textAlign: 'center' }}>

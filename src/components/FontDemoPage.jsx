@@ -116,7 +116,7 @@ const FontDemoPage = memo(({ onBack }) => {
                 fontWeight: weight,
                 letterSpacing: '-1.5px',
                 color: C.accent,
-              }}>sign</span>
+              }}>Sign</span>
             </div>
 
             {/* Medium size */}
@@ -134,7 +134,7 @@ const FontDemoPage = memo(({ onBack }) => {
                 fontWeight: weight,
                 letterSpacing: '-0.5px',
                 color: C.accent,
-              }}>sign</span>
+              }}>Sign</span>
               <span style={{ fontSize: '0.65rem', color: C.textM, marginLeft: '0.5rem' }}>Header boyutu</span>
             </div>
 

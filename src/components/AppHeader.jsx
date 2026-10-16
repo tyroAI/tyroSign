@@ -173,7 +173,7 @@ const AppHeader = memo(({ tab, setTab, lang, setLang, L, msalAccount, profileOpe
           fontSize: 23, fontWeight: 700, letterSpacing: -1, lineHeight: 1,
         }}>
           <span style={{ color: theme.tyroColor }}>tyro</span>
-          <span style={{ color: theme.signColor }}>sign</span>
+          <span style={{ color: theme.signColor }}>Sign</span>
         </span>
       </div>
 

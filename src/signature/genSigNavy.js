@@ -114,7 +114,7 @@ export const genSigNavy = (f, s, office, sigBanner) => {
   const usingPersonalLi = !!(f.linkedinPersonal && f.linkedinPersonal.trim());
   const linkedinUrl = sanitizeUrl((f.linkedinPersonal && f.linkedinPersonal.trim()) || s.social.linkedin);
   const derivedLiHandle = linkedinUrl ? linkedinUrl.replace(/https?:\/\/(www\.)?linkedin\.com\/(company\/|in\/)?/i, '').replace(/\/$/, '').replace(/-/g, '') : '';
-  // Şirket LinkedIn'inde directory kısa etiketi (ör. 'nexa') tercih edilir; kişisel girildiyse türetilen kalır
+  // Şirket LinkedIn'inde directory kısa etiketi (ör. 'tyroventures') tercih edilir; kişisel girildiyse türetilen kalır
   const linkedinHandle = usingPersonalLi ? derivedLiHandle : (s.linkedinLabel || derivedLiHandle);
   const websiteDisplay = s.website ? s.website.replace(/^www\./i, '') : '';
   const footerItems = [];

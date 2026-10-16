@@ -19,7 +19,7 @@ export function generateVCard(form, office, stg, company, lang) {
   }
 
   // Organization — şirket seçiminden gelir, yoksa ayarlardaki şirket adı
-  const orgName = (lang !== 'tr' && company && company.nameEN) ? company.nameEN : ((company && company.name) || stg.companyName || 'TYRO Tech');
+  const orgName = (lang !== 'tr' && company && company.nameEN) ? company.nameEN : ((company && company.name) || stg.companyName || 'tyroTech');
   lines.push('ORG:' + orgName);
 
   // Title (TR + EN)

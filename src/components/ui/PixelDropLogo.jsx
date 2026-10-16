@@ -65,7 +65,7 @@ const PixelDropLogo = memo(function PixelDropLogo({ height = 40, showText = true
       {pixels}
       {showText && (
         <text x="30" y="32" fontFamily="'Baloo 2','Plus Jakarta Sans',Inter,sans-serif" fontSize={textSize} fontWeight="700" letterSpacing="-1">
-          <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">sign</tspan>
+          <tspan fill="#1e3a5f">tyro</tspan><tspan fill="#c8922a">Sign</tspan>
         </text>
       )}
     </svg>

@@ -1,7 +1,7 @@
 {
-  "name": "TYRO Sign - Corporate Signature Studio",
-  "short_name": "TYRO Sign",
-  "description": "TYRO Tech kurumsal e-posta imza oluşturucu",
+  "name": "tyroSign - Corporate Signature Studio",
+  "short_name": "tyroSign",
+  "description": "tyroTech kurumsal e-posta imza oluşturucu",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -1,7 +1,7 @@
 {
   "name": "tyrosign",
   "version": "1.2.0",
-  "description": "tyrosign - Dijital e-posta imza stüdyosu (Demo / dummy veri)",
+  "description": "tyroSign - Dijital e-posta imza stüdyosu (Demo / dummy veri)",
   "private": true,
   "scripts": {
     "dev": "vite",

@@ -108,7 +108,7 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   // geliyordu ve tyro bir tık büyük duruyordu (kullanıcı geri bildirimi).
   // 64px sınırı yalnızca tyro'yi 222x71 → 199x64 küçültür, geniş logolara dokunmaz.
   //
-  // KARE/KOMPAKT ve DİKEY logolar için 64px sınırı ÇOK sert (kare logolar 1:1, TYRO Vakfı 0.75):
+  // KARE/KOMPAKT ve DİKEY logolar için 64px sınırı ÇOK sert (kare logolar 1:1, tyroFoundation 0.75):
   // logo panelde kaybolup gidiyordu. Bu logolarda sınır artık SABİT DEĞİL, panelde
   // GERÇEKTEN BOŞ OLAN yüksekliğe bağlanıyor — hesap rightH bilindikten sonra yapılır,
   // bkz. aşağıdaki "LOGO ÖLÇÜSÜ" bloğu.
@@ -253,7 +253,7 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   // ── LOGO ÖLÇÜSÜ (rightH BİLİNDİKTEN SONRA) ──
   // Geniş wordmark'lar (oran ≥ 2.5) genişlikten sınırlanır, yükseklik 64'te kalır —
   // görsel ağırlık eşitlensin diye (eski kural, dokunulmadı).
-  // KARE/DİKEY logolarda ise yükseklik sınırı SABİT 92px'ti ve dikey logo (TYRO Vakfı 0.75)
+  // KARE/DİKEY logolarda ise yükseklik sınırı SABİT 92px'ti ve dikey logo (tyroFoundation 0.75)
   // 69px genişliğe düşüp panelde kayboluyordu (kullanıcı bildirimi: "logodaki yazılar
   // bile okunmuyor"). Oysa sol panelde KULLANILMAYAN yükseklik vardı: gapH boşluğu
   // gri panelle farkı emiyordu (ölçüldü: logo 92px iken 80px boş pay).

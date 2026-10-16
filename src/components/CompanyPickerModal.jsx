@@ -39,7 +39,7 @@ const CompanyPickerModal = memo(({ open, onClose, value, onSelect, lang, L }) =>
   // ── Tek şirket kartı. head=true → grup başlığı (grup logosu, navy zeminli) ──
   const Tile = ({ c, big, head }) => {
     const active = sel === c.id;
-    // Logosu olmayan (ör. Ana Şirket / TYRO Tech) → standart tyro logosu
+    // Logosu olmayan (ör. Ana Şirket / tyroTech) → standart tyro logosu
     const url = logoOf(c) || DEFAULT_LOGO_BASE64;
     const restBg = head ? `${C.primary}0a` : '#ffffff';
     const restBorder = head ? `${C.primary}45` : C.borderSub;
@@ -132,10 +132,10 @@ const CompanyPickerModal = memo(({ open, onClose, value, onSelect, lang, L }) =>
               // Görsel seçicide sadece logosu olan şirketler (ör. Bioethanol logosuz → gösterilmez)
               const all = COMPANIES.filter(c => c.group === g && (c.logoTR || c.logoEN));
               if (!all.length) return null;
-              // Grup başı = adı grup adıyla aynı olan şirket (ör. "TYRO Yazılım")
+              // Grup başı = adı grup adıyla aynı olan şirket (ör. "tyroSoftware")
               const head = all.find(c => c.name === g) || all[0];
               const subs = all.filter(c => c.id !== head.id);
-              // Çok uzun grup (ör. TYRO Yazılım, >6 alt şirket) → 2 sütun, yataya genişle
+              // Çok uzun grup (ör. tyroSoftware, >6 alt şirket) → 2 sütun, yataya genişle
               const twoCol = subs.length > 6;
               return (
                 <div key={g} style={{ flex: twoCol ? '2 1 320px' : '1 1 160px', minWidth: twoCol ? 300 : 152, maxWidth: twoCol ? 360 : 225 }}>

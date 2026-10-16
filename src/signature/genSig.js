@@ -46,7 +46,7 @@ export const genSig = (f, s, office, sigBanner) => {
   const rbBg = s.rightBlockBg || s.logoColor;
   const linkedinUrl = sanitizeUrl((f.linkedinPersonal && f.linkedinPersonal.trim()) || s.social.linkedin);
   const derivedLiHandle = linkedinUrl ? linkedinUrl.replace(/https?:\/\/(www\.)?linkedin\.com\/(company\/|in\/)?/i, '').replace(/\/$/, '').replace(/-/g, '') : '';
-  // Şirket LinkedIn'inde directory kısa etiketi (ör. 'nexa') tercih edilir; kişisel girildiyse türetilen kalır
+  // Şirket LinkedIn'inde directory kısa etiketi (ör. 'tyroventures') tercih edilir; kişisel girildiyse türetilen kalır
   const linkedinHandle = (f.linkedinPersonal && f.linkedinPersonal.trim()) ? derivedLiHandle : (s.linkedinLabel || derivedLiHandle);
 
   // Solid renkler (Outlook-safe — rgba yerine düz hex)

@@ -26,7 +26,7 @@ export const titleCase = (str) => {
 
 // Resmi ünvandan hukuki şirket türü uzantılarını sondan temizler (TR + EN) — öz ad kalır.
 // Ör: "TYRO Tahıl ve Yem Ticaret Anonim Şirketi" → "TYRO Tahıl ve Yem"
-//     "TYRO Tech Nigeria Limited" → "TYRO Tech Nigeria"
+//     "tyroTech Nigeria Limited" → "tyroTech Nigeria"
 export const stripLegalSuffix = (name) => {
   if (!name) return name;
   let s = name.trim();

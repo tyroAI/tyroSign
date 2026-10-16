@@ -63,8 +63,8 @@ export function loadLogo(url) {
 // ─── Klasik-Navy hiyerarşisi ───
 // ÖNCELİK: companyDirectory.js (Excel kaynaklı resmi harita) → parentId/relation.
 // FALLBACK (directory'de yoksa) eski kural:
-//   Seviye 1 (TYRO Tech / ana): rozet YOK
-//   Seviye 2 (grup başı, ör. TYRO Yazılım): üst = TYRO Tech → "subsidiary"
+//   Seviye 1 (tyroTech / ana): rozet YOK
+//   Seviye 2 (grup başı, ör. tyroSoftware): üst = tyroTech → "subsidiary"
 //   Seviye 3 (alt şirket): üst = grup başı → "affiliate"
 export function navyInfo(company) {
   if (!company || company.id === 'tyro-tech') return { level: 1, parent: null, label: null };
@@ -81,20 +81,16 @@ export function navyInfo(company) {
 }
 
 // ─── Kartvizitin QR üstündeki ANA MARKA logosu ───
-// Kartvizitte kural olarak şirketin kendi logosu değil, ana marka logosu gösterilir
-// (kullanıcı isteği): "TYRO Ventures" grubunda NEXA STUDIO, diğerlerinde TYRO.
-// İSTİSNA: CARD_OWN_LOGO_IDS listesindeki şirketler kendi logolarını gösterir
-// (TYRO Vakfı bir VAKIF — TYRO marka çatısı altında değil).
-const CARD_BRAND_GROUP = 'TYRO Ventures';
-const CARD_OWN_LOGO_IDS = ['tyro-vakfi'];
+// Kartvizitte kural olarak şirketin kendi logosu değil, ana marka (tyroTech) logosu
+// gösterilir. İSTİSNA: CARD_OWN_LOGO_IDS listesindeki şirketler kendi logolarını
+// gösterir (tyroFoundation bir VAKIF — marka çatısı altında değil).
+const CARD_OWN_LOGO_IDS = ['tyro-foundation'];
 export const MAIN_CARD_LOGO = { base64: DEFAULT_LOGO_BASE64, w: DEFAULT_LOGO_W, h: DEFAULT_LOGO_H, main: true };
 
-/** Kartın marka logosu için kaynak URL — null ise TYRO ana logosu kullanılır. */
+/** Kartın marka logosu için kaynak URL — null ise tyroTech ana logosu kullanılır. */
 export function cardLogoUrl(company, lang) {
-  const ownLogo = !!company && CARD_OWN_LOGO_IDS.includes(company.id);
-  const organic = !!company && company.group === CARD_BRAND_GROUP;
-  if (!ownLogo && !organic) return null;
-  const src = ownLogo ? company : COMPANIES.find(c => c.id === 'nexa-studio');
+  if (!company || !CARD_OWN_LOGO_IDS.includes(company.id)) return null;
+  const src = company;
   return src ? (lang === 'tr' ? src.logoTR : src.logoEN) : null;
 }
 
@@ -104,8 +100,8 @@ export function companyLogoUrl(company, lang) {
   return company.id === 'tyro-digital' ? company.logoEN : (lang === 'tr' ? company.logoTR : company.logoEN);
 }
 
-/** Kısa şirket adı (lang-aware; RU/AR → EN). TYRO Digital: her dilde İngilizce. */
-export function companyShortName(company, lang, fallback = 'TYRO Tech') {
+/** Kısa şirket adı (lang-aware; RU/AR → EN). tyroDigital: her dilde İngilizce. */
+export function companyShortName(company, lang, fallback = 'tyroTech') {
   if (!company) return fallback;
   if (company.id === 'tyro-digital') return company.nameEN;
   return lang === 'tr' ? company.name : (company.nameEN || company.name);

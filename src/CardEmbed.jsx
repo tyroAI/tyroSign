@@ -22,7 +22,7 @@ import { generateVCard } from './utils/generateVCard';
 
 // Thub'ın native şirket/ofis seçicisi bu listeden beslenir. `ready` mesajının içinde
 // gönderiliyor — ayrı bir JSON dosyası koyarsak iki repoda iki kopya olur ve şirket
-// eklendiğinde (ör. TYRO Vakfı) sessizce ayrışır.
+// eklendiğinde (ör. tyroFoundation) sessizce ayrışır.
 // `street` ayrı gidiyor: Thub vCard ADR alanını `;;<street>;<city>;;;` diye bölüyor,
 // tek satır gönderirsek sokak bilgisi şehir alanına sıkışır.
 export const directory = () => ({
