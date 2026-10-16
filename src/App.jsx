@@ -372,8 +372,8 @@ export default function App() {
       navyBadge, // Klasik-Navy sağ alt hiyerarşi rozeti
       navyIsMain: nv.level === 1, // 1. seviye (ana) → sol logo daha büyük
       navyIcons, // Klasik-Navy koyu iletişim ikonları
-      // Dikey bar rengi seviyeye göre: 1 → lacivert (varsayılan), 2 → tyro altını, 3 → tyro turkuazı
-      navyBarColor: ({ 2: '#c8922a', 3: '#3cbfbf' })[nv.level] || null,
+      // Dikey bar rengi seviyeye göre: 1 → lacivert (varsayılan), 2-3 → tyro altını
+      navyBarColor: ({ 2: '#c8922a', 3: '#c8922a' })[nv.level] || null,
       // Hiyerarşi seviyesi (1 ana / 2 grup / 3 iştirak) — V4 sağ kenar çubuğunun rengi bundan türer
       navyLevel: nv.level,
     };

@@ -18,7 +18,6 @@ export const V4_PANEL_BG = '#f8f8f8';
 const BAR_IMG = {
   '#232c5e': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAIAAADuA9qHAAAAEUlEQVR42mPgc6/CgxjwSwMA7TEQLRALbCsAAAAASUVORK5CYII=',
   '#c8922a': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAIAAADuA9qHAAAAEUlEQVR42mPYd80AD2LALw0AUkIjUZJlEcQAAAAASUVORK5CYII=',
-  '#3cbfbf': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAIAAADuA9qHAAAAEUlEQVR42mMQ3X4OD2LALw0A0u8gCWnfTToAAAAASUVORK5CYII=',
 };
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -26,8 +25,8 @@ const BAR_IMG = {
 // İki panel yan yana, toplam 600px:
 //   [ 10px TYRO MAVİSİ çubuk ][ 280px BEYAZ panel ][ 300px GRİ panel ][ 10px HİYERARŞİ çubuğu ]
 //   • Sol çubuk HER ZAMAN tyro mavisi (#232c5e) — şirket/seviye ne olursa olsun
-//   • Sağ çubuk seviyeye göre: 1 (ana) mavi • 2 (grup/subsidiary) tyro altını
-//     • 3 (iştirak/affiliate) tyro turkuazı   → s.navyLevel (App.jsx hesaplar)
+//   • Sağ çubuk seviyeye göre: 1 (ana) mavi • 2-3 (grup şirketi / iştirak) tyro altını
+//     → s.navyLevel (App.jsx hesaplar)
 //   • BEYAZ panel: üstte logo (panel genişliğine ölçekli), ALTTA web sitesi (bold mavi)
 //     + LinkedIn ikonu ve etiketi — tasarımdaki "social media link" satırı
 //   • GRİ panel (#f2f2f2): ad SOYAD, ünvan, resmi ünvan, adres, Pbx/Fax/Gsm
@@ -73,10 +72,9 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   const GRAY = V4_PANEL_BG;
   // TYRO logosunun gerçek üç rengi (logo piksellerinden örneklendi — V3 ile aynı)
   const BLUE = '#232c5e';    // tyro mavisi (wordmark laciverti)
-  const GREEN = '#c8922a';   // tyro altını
-  const TURQ = '#3cbfbf';    // tyro turkuazı
+  const GOLD = '#c8922a';    // tyro altını
   // Sağ çubuk = hiyerarşi rengi; seviye bilinmiyorsa mavi
-  const barColor = ({ 1: BLUE, 2: GREEN, 3: TURQ })[s.navyLevel] || BLUE;
+  const barColor = ({ 1: BLUE, 2: GOLD, 3: GOLD })[s.navyLevel] || BLUE;
 
   const cDark = '#26292e';   // ad SOYAD / resmi ünvan / e-posta lokali
   const cGray = '#54585c';   // ünvan / adres / telefonlar / e-posta domaini
