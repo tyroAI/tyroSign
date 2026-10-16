@@ -36,46 +36,67 @@ const CompanyPickerModal = memo(({ open, onClose, value, onSelect, lang, L }) =>
 
   const confirm = () => { if (sel) { onSelect(sel); onClose(); } };
 
-  // ── Tek şirket kartı. head=true → grup başlığı (grup logosu, navy zeminli) ──
-  const Tile = ({ c, big, head }) => {
+  // ── Tek şirket kartı — HEPSİ aynı ölçüde: sabit yükseklik, logo kutuya ortalı.
+  // Logolar (public/logos) tyroTech ile aynı yükseklik/kenar boşluğunda üretildiği
+  // için sabit yükseklik = görsel olarak eşit yazı boyutu demek.
+  const Tile = ({ c, main }) => {
     const active = sel === c.id;
-    // Logosu olmayan (ör. Ana Şirket / tyroTech) → standart tyro logosu
-    const url = logoOf(c) || DEFAULT_LOGO_BASE64;
-    const restBg = head ? `${C.primary}0a` : '#ffffff';
-    const restBorder = head ? `${C.primary}45` : C.borderSub;
+    const url = logoOf(c) || DEFAULT_LOGO_BASE64; // logosuz → tyroTech ana logosu
+    const restBorder = main ? `${C.primary}35` : C.borderSub;
     return (
       <button
         type="button"
         onClick={() => setSel(c.id)}
         title={nameOf(c)}
         style={{
-          position: 'relative', width: '100%',
-          minHeight: big ? 74 : head ? 70 : 62,
+          position: 'relative', width: '100%', height: main ? 76 : 58,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: big ? '10px 12px' : head ? '8px 8px' : '7px 6px',
-          background: active ? `${C.accent}0e` : restBg,
-          border: active ? `2px solid ${C.accent}` : `${head ? '1.5px' : '1px'} solid ${restBorder}`,
-          borderRadius: 12, cursor: 'pointer',
-          boxShadow: active ? `0 0 0 3px ${C.accent}22, 0 4px 14px ${C.primary}12` : '0 1px 3px rgba(30,58,95,0.06)',
+          padding: '6px 10px',
+          background: active ? `${C.accent}0e` : '#ffffff',
+          border: active ? `2px solid ${C.accent}` : `1px solid ${restBorder}`,
+          borderRadius: 10, cursor: 'pointer',
+          boxShadow: active ? `0 0 0 3px ${C.accent}22, 0 4px 14px ${C.primary}12` : '0 1px 2px rgba(30,58,95,0.05)',
           transition: 'all 0.16s ease',
         }}
         onMouseEnter={e => { if (!active) { e.currentTarget.style.borderColor = `${C.accent}70`; e.currentTarget.style.boxShadow = `0 4px 14px ${C.primary}14`; } }}
-        onMouseLeave={e => { if (!active) { e.currentTarget.style.borderColor = restBorder; e.currentTarget.style.boxShadow = '0 1px 3px rgba(30,58,95,0.06)'; } }}
+        onMouseLeave={e => { if (!active) { e.currentTarget.style.borderColor = restBorder; e.currentTarget.style.boxShadow = '0 1px 2px rgba(30,58,95,0.05)'; } }}
       >
         <img src={url} alt={nameOf(c)} loading="lazy"
-          style={{ maxWidth: '100%', maxHeight: big ? 52 : head ? 50 : 46, objectFit: 'contain', display: 'block' }} />
+          style={{ height: main ? 60 : 44, maxWidth: '100%', objectFit: 'contain', display: 'block' }} />
         {active && (
           <span style={{
-            position: 'absolute', top: -8, right: -8, width: 22, height: 22, borderRadius: '50%',
+            position: 'absolute', top: -8, right: -8, width: 20, height: 20, borderRadius: '50%',
             background: C.accent, display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
           }}>
-            <Check size={13} color="#fff" strokeWidth={3} />
+            <Check size={12} color="#fff" strokeWidth={3} />
           </span>
         )}
       </button>
     );
   };
+
+  const T = (o) => o[lang] || o.en;
+  const LBL = {
+    main: { tr: 'Ana Şirket', en: 'Parent Company', ru: 'Головная компания', ar: 'الشركة الأم' },
+    head: { tr: 'Grup Şirketi', en: 'Group Company', ru: 'Компания группы', ar: 'شركة المجموعة' },
+    subs: { tr: 'İştirakler', en: 'Affiliates', ru: 'Дочерние компании', ar: 'الشركات التابعة' },
+  };
+  const Caption = ({ children, color = C.textM }) => (
+    <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color, margin: '0 0 0.4rem', textAlign: 'center' }}>
+      {children}
+    </div>
+  );
+  const LINE = `${C.primary}30`;
+
+  const groups = otherGroups.map(g => {
+    const all = COMPANIES.filter(c => c.group === g);
+    if (!all.length) return null;
+    // Grup başı = adı grup adıyla aynı olan şirket (ör. "tyroSoftware")
+    const head = all.find(c => c.name === g) || all[0];
+    return { g, head, subs: all.filter(c => c.id !== head.id) };
+  }).filter(Boolean);
+  const n = groups.length;
 
   return (
     <div
@@ -95,7 +116,7 @@ const CompanyPickerModal = memo(({ open, onClose, value, onSelect, lang, L }) =>
           backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
           borderRadius: 18, border: `1px solid ${C.borderSub}`,
           boxShadow: '0 24px 48px rgba(30,58,95,0.22), 0 8px 16px rgba(30,58,95,0.1)',
-          width: '100%', maxWidth: 1080, maxHeight: '88vh',
+          width: '100%', maxWidth: 1040, maxHeight: '90vh',
           display: 'flex', flexDirection: 'column',
           position: 'relative', animation: 'slideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
           overflow: 'hidden',
@@ -117,36 +138,48 @@ const CompanyPickerModal = memo(({ open, onClose, value, onSelect, lang, L }) =>
           </button>
         </div>
 
-        {/* ── Body (scroll) ── */}
-        <div style={{ padding: '1.1rem 1.4rem', overflowY: 'auto', flex: 1 }}>
-          {/* Ana şirket — üstte, ortalanmış */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.2rem' }}>
-            <div style={{ maxWidth: 280, width: '100%' }}>
-              {mainCompanies.map(c => <Tile key={c.id} c={c} big />)}
+        {/* ── Body (scroll) — org şeması: ana şirket → gruplar → iştirakler ── */}
+        <div style={{ padding: '1.2rem 1.4rem 1.4rem', overflowY: 'auto', flex: 1 }}>
+          {/* Ana şirket — ortada */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: 260 }}>
+              <Caption color={C.primary}>{T(LBL.main)}</Caption>
+              {mainCompanies.map(c => <Tile key={c.id} c={c} main />)}
             </div>
           </div>
 
-          {/* Gruplar — sütunlar (org şemasındaki gibi) */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.9rem', alignItems: 'flex-start' }}>
-            {otherGroups.map(g => {
-              // Görsel seçicide sadece logosu olan şirketler (ör. Bioethanol logosuz → gösterilmez)
-              const all = COMPANIES.filter(c => c.group === g && (c.logoTR || c.logoEN));
-              if (!all.length) return null;
-              // Grup başı = adı grup adıyla aynı olan şirket (ör. "tyroSoftware")
-              const head = all.find(c => c.name === g) || all[0];
-              const subs = all.filter(c => c.id !== head.id);
-              // Çok uzun grup (ör. tyroSoftware, >6 alt şirket) → 2 sütun, yataya genişle
-              const twoCol = subs.length > 6;
-              return (
-                <div key={g} style={{ flex: twoCol ? '2 1 320px' : '1 1 160px', minWidth: twoCol ? 300 : 152, maxWidth: twoCol ? 360 : 225 }}>
-                  {/* Grup başlığı = grup logosu (tıklanabilir, seçilebilir) */}
-                  <Tile c={head} head />
-                  <div style={{ display: 'grid', gridTemplateColumns: twoCol ? '1fr 1fr' : '1fr', gap: '0.5rem', marginTop: '0.55rem' }}>
-                    {subs.map(c => <Tile key={c.id} c={c} />)}
-                  </div>
+          {/* Bağlantı çizgileri: dikey gövde + gruplar arası yatay hat */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: 2, height: 18, background: LINE }} />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${n}, 1fr)`, gap: '0.9rem', position: 'relative' }}>
+            {n > 1 && (
+              <div style={{ position: 'absolute', top: 0, height: 2, background: LINE,
+                left: `calc((100% - ${(n - 1) * 0.9}rem) / ${2 * n})`, right: `calc((100% - ${(n - 1) * 0.9}rem) / ${2 * n})` }} />
+            )}
+            {groups.map(({ g, head, subs }) => (
+              <div key={g} style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
+                <div style={{ alignSelf: 'center', width: 2, height: 16, background: LINE }} />
+                <div style={{
+                  border: `1px solid ${C.borderSub}`, borderRadius: 14, padding: '0.75rem',
+                  background: 'linear-gradient(180deg, rgba(30,58,95,0.035), rgba(30,58,95,0.01))',
+                }}>
+                  <Caption color={C.primary}>{T(LBL.head)}</Caption>
+                  <Tile c={head} />
+                  {subs.length > 0 && (
+                    <>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div style={{ width: 2, height: 12, background: LINE }} />
+                      </div>
+                      <Caption>{T(LBL.subs)}</Caption>
+                      <div style={{ display: 'grid', gap: '0.45rem' }}>
+                        {subs.map(c => <Tile key={c.id} c={c} />)}
+                      </div>
+                    </>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 

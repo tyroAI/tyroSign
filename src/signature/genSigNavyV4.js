@@ -1,4 +1,6 @@
 import { escapeHtml, sanitizeUrl, titleCase, formatGSM } from '../utils/formatting';
+import { solidPng } from './solidPng';
+import { DEFAULT_LOGO_W, DEFAULT_LOGO_H } from '../constants/limits';
 import { sigBannerRows } from './sigBannerRows';
 import { wrapToWidth } from './wrapToWidth';
 import { linkedinBlueSvg } from '../icons/svgDataUris';
@@ -15,18 +17,16 @@ export const V4_PANEL_BG = '#f8f8f8';
 // Kaynak 10px GENİŞ → yatayda ölçekleme yok, yalnızca dikeyde esner; düz renk olduğu
 // için interpolasyon aynı rengi verir. Alfa olmadığı için Word'ün "saydamlığı beyaza
 // matlaştırma" yolu da devre dışı kalır.
-const BAR_IMG = {
-  '#232c5e': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAIAAADuA9qHAAAAEUlEQVR42mPgc6/CgxjwSwMA7TEQLRALbCsAAAAASUVORK5CYII=',
-  '#c8922a': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAIAAADuA9qHAAAAEUlEQVR42mPYd80AD2LALw0AUkIjUZJlEcQAAAAASUVORK5CYII=',
-};
+// Çubuk PNG'leri artık çalışma anında üretiliyor (solidPng) → renk değişince
+// gömülü görselin eski renkte kalması imkânsız.
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // KLASİK - V4 SIGNATURE GENERATOR (müşteri kartvizit tasarımı, 2026)
 // İki panel yan yana, toplam 600px:
 //   [ 10px TYRO MAVİSİ çubuk ][ 280px BEYAZ panel ][ 300px GRİ panel ][ 10px HİYERARŞİ çubuğu ]
 //   • Sol çubuk HER ZAMAN tyro mavisi (#232c5e) — şirket/seviye ne olursa olsun
-//   • Sağ çubuk seviyeye göre: 1 (ana) mavi • 2-3 (grup şirketi / iştirak) tyro altını
-//     → s.navyLevel (App.jsx hesaplar)
+//   • Sağ çubuk seviyeye göre: 1 (ana) lacivert • 2 (grup şirketi) tyro mavisi
+//     • 3 (iştirak) tyro altını → s.navyLevel (App.jsx hesaplar)
 //   • BEYAZ panel: üstte logo (panel genişliğine ölçekli), ALTTA web sitesi (bold mavi)
 //     + LinkedIn ikonu ve etiketi — tasarımdaki "social media link" satırı
 //   • GRİ panel (#f2f2f2): ad SOYAD, ünvan, resmi ünvan, adres, Pbx/Fax/Gsm
@@ -72,9 +72,10 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   const GRAY = V4_PANEL_BG;
   // TYRO logosunun gerçek üç rengi (logo piksellerinden örneklendi — V3 ile aynı)
   const BLUE = '#232c5e';    // tyro mavisi (wordmark laciverti)
+  const SKY = '#0098d4';     // tyro mavisi (uygulama vurgu rengi)
   const GOLD = '#c8922a';    // tyro altını
   // Sağ çubuk = hiyerarşi rengi; seviye bilinmiyorsa mavi
-  const barColor = ({ 1: BLUE, 2: GOLD, 3: GOLD })[s.navyLevel] || BLUE;
+  const barColor = ({ 1: BLUE, 2: SKY, 3: GOLD })[s.navyLevel] || BLUE;
 
   const cDark = '#26292e';   // ad SOYAD / resmi ünvan / e-posta lokali
   const cGray = '#54585c';   // ünvan / adres / telefonlar / e-posta domaini
@@ -261,12 +262,13 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   // Logo ile alt satır arasındaki ASGARİ boşluk: geniş wordmark'larda 20px (tasarımdaki
   // nefes payı, dokunulmadı); yükseklikten sınırlanan kare/dikey logolarda 8px, çünkü
   // orada her piksel logoya gidiyor ve 20px'lik pay görsel olarak israf oluyordu.
-  const isTall = (natW / natH) < 2.5;
-  const MIN_GAP = isTall ? 8 : 20;
-  const availLH = rightH - LPADT - (hasFoot ? FOOT_H : 0) - LPADB - MIN_GAP;
-  const maxLH = isTall ? Math.max(92, Math.min(150, availLH)) : 64;
-  let sc = maxLW / natW;
-  if (natH * sc > maxLH) sc = maxLH / natH;  // çok dikey logolarda yüksekliği sınırla
+  // DEMO — TEK TİP LOGO KUTUSU: şirket logoları tyroTech ile AYNI düzen/yükseklikte
+  // üretildiği için hepsi tyroTech'in kapladığı kutuya (maxLW × LOGO_BOX_H) sığdırılır.
+  // Kısa adlar tyroTech ile birebir aynı yazı boyutunda çıkar; uzun adlar genişliğe
+  // sığsın diye orantılı küçülür → hiçbir logo tyroTech'ten büyük görünmez.
+  const LOGO_BOX_H = Math.round(maxLW * DEFAULT_LOGO_H / DEFAULT_LOGO_W); // 222 × 61/140 ≈ 97
+  const MIN_GAP = 8;
+  const sc = Math.min(maxLW / natW, LOGO_BOX_H / natH);
   const lw = Math.max(1, Math.round(natW * sc));
   const lh = Math.max(1, Math.round(natH * sc));
   // Logonun içindeki şeffaf sol boşluk da ölçeklenir → alt satır logonun GÖRÜNEN
@@ -300,7 +302,7 @@ export const genSigNavyV4 = (f, s, office, sigBanner, opts = {}) => {
   // vertical-align:top → olası 1-3px sapma en ALT kenarda, panelin alt iç boşluğunda kalır.
   // class="sgn4-barin" resimde KALIR → mobil media query (width:100%;height:5px !important)
   // hem width niteliğini hem inline style'ı ezer, responsive davranış aynı.
-  const barTd = (color) => `<td class="sgn4-bar" width="${BAR}" height="${barH}" bgcolor="${color}" style="width:${BAR}px;height:${barH}px;background-color:${color};font-size:0;line-height:0;vertical-align:top;"><img class="sgn4-barin" src="${BAR_IMG[color] || BAR_IMG[BLUE]}" width="${BAR}" height="${barH}" alt="" style="display:block;border:0;width:${BAR}px;height:${barH}px;" /></td>`;
+  const barTd = (color) => `<td class="sgn4-bar" width="${BAR}" height="${barH}" bgcolor="${color}" style="width:${BAR}px;height:${barH}px;background-color:${color};font-size:0;line-height:0;vertical-align:top;"><img class="sgn4-barin" src="${solidPng(color, BAR, 2)}" width="${BAR}" height="${barH}" alt="" style="display:block;border:0;width:${BAR}px;height:${barH}px;" /></td>`;
 
   // Beyaz panel: logo → (hesaplanan boşluk) → web/LinkedIn satırı
   const leftInner = `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">` +

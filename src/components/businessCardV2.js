@@ -29,7 +29,7 @@ import { escapeHtml, sanitizeUrl } from '../utils/formatting';
 // Uygulamanın MARKA değerleri (imza üreticileriyle birebir aynı) kullanılıyor;
 // PDF'ten ölçülen renkler (#1D4475 / #BFCE53 / #51B1C8) bunların CMYK→sRGB
 // dönüşümünde solmuş hâli. Marka değerlerini kullanmak kartı imzayla tutarlı tutar.
-export const V2_BAND = { 1: '#232c5e', 2: '#c8922a', 3: '#c8922a' };
+export const V2_BAND = { 1: '#232c5e', 2: '#0098d4', 3: '#c8922a' };
 
 /** Bandı koyulaştırıp buton rengini üretir. PDF'te buton/bant ilişkisi ~0.70 çarpan. */
 export function darkenHex(hex, f = 0.70) {
@@ -54,7 +54,7 @@ export function v2Colors(navyLevel) {
   // Lacivert seçimi bu sorunu kökten kapatıyor.
   //
   // İMZA TASARIMLARI ETKİLENMEZ: onlar hiyerarşi rengini kendi içlerinde
-  // hesaplıyor (genSigNavyV4.js: barColor = {1:BLUE,2:GOLD,3:GOLD}[s.navyLevel]).
+  // hesaplıyor (genSigNavyV4.js: barColor = {1:BLUE,2:SKY,3:GOLD}[s.navyLevel]).
   // Hiyerarşi rengini KARTA geri getirmek istenirse tek satır:
   //   const band = V2_BAND[navyLevel] || V2_BAND[1];
   const band = V2_BAND[1];
