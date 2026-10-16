@@ -1,0 +1,23 @@
+{
+  "name": "tyrosign",
+  "version": "1.2.0",
+  "description": "tyrosign - Dijital e-posta imza stüdyosu (Demo / dummy veri)",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^5.4.0",
+    "html2canvas": "^1.4.1",
+    "lucide-react": "^0.263.1",
+    "qrcode": "^1.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.4.0"
+  }
+}

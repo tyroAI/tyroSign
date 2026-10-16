@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.vite/
+*.local
+.DS_Store
+nul
+.claude/
+.env
+.env.local
+.env.*.local
+
+# Geçici doğrulama/harness dosyaları (src altına yazılır, ASLA commit edilmez).
+# 0f27464 commit' inde dört tanesi kazara girdi: git add -A, ajanlar o an src/ altına
+# yazarken her seyi supurdu. Bu kural tekrarini onler.
+src/__*
+__harness_*
